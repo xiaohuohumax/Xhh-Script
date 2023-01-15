@@ -1,0 +1,116 @@
+[
+  { "name": "JY", "api": "https://jx.playerjy.com/?url=%url%", "index": 90 },
+  {
+    "name": "维多解析(超清)",
+    "api": "http://jx.ivito.cn/?url=%url%",
+    "index": 80
+  },
+  {
+    "name": "玩的嗨",
+    "api": "http://tv.wandhi.com/go.html?url=%url%",
+    "index": 70
+  },
+  {
+    "api": "https://jx.bozrc.com:4433/player/?url=%url%",
+    "name": "B站解析",
+    "index": 60
+  },
+  {
+    "api": "https://www.pangujiexi.cc/jiexi.php?url=%url%",
+    "name": "盘古"
+  },
+  {
+    "api": "https://jx.yparse.com/index.php?url=%url%",
+    "name": "云析"
+  },
+  {
+    "api": "https://api.jiexi.la/?url=%url%",
+    "name": "解析啦"
+  },
+  {
+    "api": "https://vip.laobandq.com/jiexi.php?url=%url%",
+    "name": "老板"
+  },
+  {
+    "api": "https://jiexi.janan.net/jiexi/?url=%url%",
+    "name": "MUTV"
+  },
+  {
+    "api": "https://www.8090g.cn/?url=%url%",
+    "name": "8090g"
+  },
+
+  {
+    "api": "https://www.8090.la/8090/?url=%url%",
+    "name": "全能vip接口"
+  },
+  {
+    "name": "eptept",
+    "api": "https://dmjx.m3u8.tv/?url=%url%"
+  },
+  {
+    "api": "https://api.okjx.cc:3389/jx.php?url=%url%",
+    "name": "OK解析"
+  },
+  {
+    "api": "http://jx.ppflv.com/?url=%url%",
+    "name": "云解析"
+  },
+  {
+    "api": "https://jx.xmflv.com/?url=%url%",
+    "name": "虾米解析"
+  },
+  {
+    "api": "https://jx.aidouer.net/?url=%url%",
+    "name": "爱豆解析"
+  },
+  {
+    "name": "play",
+    "api": "https://www.playm3u8.cn/jiexi.php?url=%url%"
+  },
+  { "name": "夜幕", "api": "https://www.yemu.xyz/?url=%url%" },
+  {
+    "name": "TV解析[腾讯(芒果)]",
+    "api": "https://jx.m3u8.tv/jiexi/?url=%url%"
+  },
+  {
+    "name": "冰豆",
+    "api": "https://api.qianqi.net/vip/?url=%url%"
+  },
+  {
+    "name": "诺讯",
+    "api": "https://www.nxflv.com/?url=%url%"
+  },
+  { "name": "听乐", "api": "https://jx.dj6u.com/?url=%url%" },
+  {
+    "name": "七哥",
+    "api": "https://jx.mmkv.cn/tv.php?url=%url%"
+  },
+  {
+    "name": "973973",
+    "api": "https://jx.973973.xyz/?url=%url%"
+  },
+  {
+    "name": "JY解析",
+    "api": "https://jx.we-vip.com/?url=%url%"
+  },
+  {
+    "name": "无名小站",
+    "api": "http://www.82190555.com/video.php?url=%url%",
+    "title": "综合线路"
+  },
+  {
+    "name": "OK解析",
+    "api": "https://okjx.cc/?url=%url%",
+    "title": "B站(第一源)"
+  },
+  {
+    "name": "180解析",
+    "api": "https://jx.000180.top/jx/?url=%url%"
+  },
+  {
+    "name": "17云",
+    "api": "https://www.1717yun.com/jx/ty.php?url=%url%",
+    "title": "优酷、腾讯超清、速度较快"
+  }
+]

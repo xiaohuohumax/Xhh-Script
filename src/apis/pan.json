@@ -1,0 +1,83 @@
+[
+  {
+    "name": "小昭来啦",
+    "api": "https://www.xiaozhaolaila.com/s/search?q=%info%",
+    "title": "https://www.xiaozhaolaila.com/",
+    "index": 100
+  },
+  {
+    "name": "小猪快盘",
+    "api": "https://www.xiaozhukuaipan.com/s/search?q=%info%",
+    "title": "https://www.xiaozhukuaipan.com"
+  },
+  {
+    "name": "盘么么",
+    "api": "http://www.panmeme.com/query?key=%info%",
+    "title": "http://www.panmeme.com/"
+  },
+  {
+    "name": "小白盘",
+    "api": "http://www.xiaobaipan.com/list-%info%.html",
+    "title": "http://www.xiaobaipan.com/"
+  },
+  {
+    "name": "热盘搜",
+    "api": "http://www.repanso.com/q?wd=%info%",
+    "title": "http://www.repanso.com"
+  },
+  {
+    "name": "V盘搜",
+    "api": "http://www.vpansou.com/query?wd=%info%",
+    "title": "http://www.vpansou.com/"
+  },
+  {
+    "name": "百度网盘搜索",
+    "api": "http://aizhaomu.com/search/kw%info%",
+    "title": "http://aizhaomu.com/"
+  },
+  {
+    "name": "搜度网盘搜索",
+    "api": "http://www.sodu123.com/sodu/so.php?q=%info%",
+    "title": "http://www.sodu123.com/"
+  },
+  {
+    "name": "fastsoso",
+    "api": "https://www.fastsoso.cn/search?k=%info%",
+    "title": "https://www.fastsoso.cn/"
+  },
+  {
+    "name": "51搜盘",
+    "api": "http://www.51sopan.cn/search?keywords=%info%",
+    "title": "http://www.51sopan.cn/"
+  },
+  {
+    "name": "两仪鸟搜索",
+    "api": "http://www.baiduyunsousou.com/search?kw=%info%",
+    "title": "http://www.baiduyunsousou.com/"
+  },
+  {
+    "name": "微盘搜",
+    "api": "http://www.vpanso.com/s?wd=%info%",
+    "title": "http://www.vpanso.com/"
+  },
+  {
+    "name": "云搜大师",
+    "api": "https://www.xxhh360.com/search?q=%info%",
+    "title": "https://www.xxhh360.com/"
+  },
+  {
+    "name": "及搜盘",
+    "api": "http://www.jisoupan.com/search/%info%.html",
+    "title": "http://www.jisoupan.com/"
+  },
+  {
+    "name": "读书小站",
+    "api": "http://ibooks.org.cn/?s=%info%",
+    "title": "http://ibooks.org.cn/"
+  },
+  {
+    "name": "小说搜搜",
+    "api": "https://www.xssousou.com/s/%info%.html://neikuw.com/?s=%info%",
+    "title": "https://www.xssousou.com/"
+  }
+]

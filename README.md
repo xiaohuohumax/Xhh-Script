@@ -1,76 +1,121 @@
 # Xhh-Script
-**自用油猴脚本-VIP视频解析-网盘资源搜索**
 
-## 感谢
+自用油猴脚本 /Shadow DOM/
 
-**感谢各位 API 的制作者,有了你们我才能快乐的玩耍♪(＾∀＾●)ﾉ.**
+### 🧰 功能
 
-## 功能
+- 🎥 VIP 视频解析
+- 🕸 网盘资源搜索
 
-+ **VIP视频解析(覆盖大部分视频网站)**
-+ **网盘资源搜索**
+### 📖 使用
 
-## 界面截图及使用方法
+- 浏览器安装 🔗[油猴](https://www.tampermonkey.net/) 插件
+- 油猴中新建脚本
+- 使用项目打包完成的脚本 [xhh-script.js](./dist/xhh-script.js) 替换即可新油猴脚本内容
+- 最后刷新网页即可
 
-**绿色背景请忽视 ⊙﹏⊙,只是拿来演示截图用的,实际没有的**
+### 🔨 修改脚本配置
 
-**vip视频解析使用方法:**
+对照脚本 [xhh-script.js](./dist/xhh-script.js) 中配置的说明修改即可
 
-+ 进入想要观看视频的网页
-+ 点击脚本上的解析接口的列表项即可
-+ 可以筛选符合要求的接口
+```javascript
+// 基础配置
+// elementName         Shadow DOM 标签名称
+// ...
+window.base_config = {
+  elementName: 'xhh-script',
+  // ...
+}
+```
 
-**注**: 旁边的 `#` 表示上一次点击的是哪一个接口
+### 🧪 运行 & 修改 & 构建
 
-![视频解析](./image/vipshow.png)
+- 克隆项目源码
+- 安装依赖 & 运行调试
 
-**网盘资源搜索使用方法:**
+  ```shell
+  npm i
+  npm run dev
+  ```
 
+- 打包构建
 
-+ 点击接口列表
-+ 再向最顶部的文本框输入要搜索资源的名字,回车即可开始搜索.
+  ```shell
+  npm run build
+  ```
 
-![网盘资源](./image/panshow.png)
+### 📂 使用油猴调试
 
-## 说明
+- 打包项目, 生成脚本 [xhh-script.js](./dist/xhh-script.js)
+- 修改油猴插件允许读取本地文件
+- 油猴新建脚本页
+- 新建脚本并添加 header 指向打包完成脚本即可
 
-+ 脚本中的API接口均来自于网络搜索,以及油猴的的前辈们.
-+ 脚本可以用于 **油猴** 或 **`<script>`引入网页** 但是用 **引入** 的话会有部分功能无法实现.
-+ 兼容性未作处理,无法使用的话我也没辙,反正我自己可以用♪(＾∀＾●)ﾉ(**注**: 本人使用QQ浏览器,加红色油猴).
+  ```javascript
+  // ==UserScript==
+  // @name         测试
+  // ...
+  // @require      file://D:\Github\Xhh-Script\dist\xhh-script.js
+  // ==/UserScript==
+  ```
 
-## 脚本特点
+### ⚙ 项目环境
 
-+ **可自行扩展**
+vite + bootstrap + vue3
 
-![模块扩展](./image/show.png)
+### 🌳 项目文件结构说明
 
-+ **脚本采用 Shadow DOM**
+```text
+Xhh-Script
+ ├── build                      // 脚本构建插件
+ │   ├── index.js
+ │   └── plugins
+ │       ├── format.js
+ │       └── template.txt
+ ├── dist                       // 油猴脚本
+ │   └── xhh-script.js
+ ├── global.config.js           // 全局配置
+ ├── index.html
+ ├── jsconfig.json
+ ├── LICENSE
+ ├── package-lock.json
+ ├── package.json
+ ├── README.md
+ ├── src
+ │   ├── apis                   // 模块 API
+ │   │   ├── api.rule.md        // API 格式说明
+ │   │   ├── pan.json
+ │   │   └── vip.json
+ │   ├── App.vue
+ │   ├── components
+ │   │   ├── EmojiIcon.vue
+ │   │   └── ModuleCard.vue
+ │   ├── config                 // 插件配置
+ │   │   ├── base.config.js
+ │   │   ├── pan.config.js
+ │   │   └── vip.config.js
+ │   ├── exception
+ │   │   └── config.error.js
+ │   ├── header                 // 油猴插件 header
+ │   │   ├── headers.js
+ │   │   └── headers.json
+ │   ├── init.js
+ │   ├── main.js
+ │   ├── model
+ │   │   └── config.loader.js
+ │   ├── module                 // 子模块
+ │   │   ├── PanModule.vue
+ │   │   └── VipModule.vue
+ │   └── utils                  // 辅助工具
+ │       ├── load.config.js
+ │       ├── load.header.js
+ │       ├── load.style.js
+ │       ├── logger.js
+ │       ├── meta.env.js
+ │       └── url.js
+ └── vite.config.js
+```
 
-![Shadow DOM](./image/style.png)
+### 💕 感谢
 
-+ **脚本会记住你上一次的选择**
-
-+ **兼容性差,也算是吧 ⊙﹏⊙‖**
-
-## 设置
-
-+ **修改设置**
-
-![设置](./image/setting.png)
-
-+ **网盘资源搜索API 可自行扩展,API越前,显示也就越靠前**
-
-![网盘资源](./image/panAPIS.png)
-
-+ **VIP视频解析API 同上一个也可以自行扩展**
-
-![视频解析](./image/vipApis.png)
-
-
-## 其它
-
-其实这个脚本是学习到 Shadow DOM 是写的,在这之前还有一版,权当练手小项目.
-
-学习网址 [JAVASCRIPT.INFO](https://zh.javascript.info/)
-
-
+感谢各位 API 的制作者, 有了你们我才能快乐的玩耍 ♪(＾ ∀ ＾ ●)ﾉ

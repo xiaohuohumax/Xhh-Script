@@ -1,0 +1,8 @@
+[{{header}}]
+/* eslint-disable */ /* spell-checker: disable */
+(() => {
+'use strict';
+[{{config}}]
+// 以下为压缩代码,请勿修改
+[{{code}}]
+})();
