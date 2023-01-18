@@ -24,9 +24,9 @@ export function setupFormat({}) {
 
         let scriptTmp = fs.readFileSync(templatePath, 'utf-8')
 
-        scriptTmp = scriptTmp.replace('[{{code}}]', fs.readFileSync(scriptPath, 'utf-8'))
-        scriptTmp = scriptTmp.replace('[{{config}}]', loadConfig())
-        scriptTmp = scriptTmp.replace('[{{header}}]', loadHeader())
+        scriptTmp = scriptTmp.replace('[{{code}}]', () => fs.readFileSync(scriptPath, 'utf-8'))
+        scriptTmp = scriptTmp.replace('[{{config}}]', () => loadConfig())
+        scriptTmp = scriptTmp.replace('[{{header}}]', () => loadHeader())
 
         fs.writeFileSync(scriptPath, scriptTmp)
 
