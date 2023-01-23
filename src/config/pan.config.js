@@ -1,4 +1,4 @@
-import { ConfigErrorParam } from '../exception/config.error'
+import { ConfigCheckError } from '../exception/config.error'
 import { ConfigLoader } from '../model/config.loader'
 import panApisJson from '../apis/pan.json'
 
@@ -8,10 +8,10 @@ export function formatPanApi(panApis) {
     .sort((a, b) => (a.index > b.index ? -1 : 1))
 }
 
-export const panConfigLoader = new ConfigLoader({
+export default new ConfigLoader({
   key: 'pan_config',
   name: '网盘资源搜索配置',
-  data: {
+  config: {
     icon: '🕸',
     name: '网盘资源搜索',
     isUsePan: true,
@@ -20,7 +20,7 @@ export const panConfigLoader = new ConfigLoader({
     apis: formatPanApi(panApisJson),
   },
   description: 'pan config',
-  fieldAnnotations: {
+  fieldDescription: {
     icon: '模块图标',
     name: '模块名称',
     isUsePan: '是否使用[网盘资源搜索]模块',
@@ -35,16 +35,15 @@ export const panConfigLoader = new ConfigLoader({
     'apis.title': '提示信息 [可缺省,缺省与name相同]',
     'apis.index': '排序下标越大越靠前 [可缺省,缺省为0]',
   },
-  checkCallback: (data, defaultData) => {
-    if (data == undefined) {
-      throw new Error('config lost')
+  checkCallback: ({ key, name, description, fieldDescription, config, defaultConfig }) => {
+    if (config == undefined) {
+      throw new ConfigCheckError(`config lost[${name}]: ${key}`)
     }
-    for (let defineKey of Object.keys(defaultData)) {
-      if (!Object.keys(data).includes(defineKey)) {
-        throw new ConfigErrorParam(defineKey, 'param lost')
+    for (let defineKey of Object.keys(defaultConfig)) {
+      if (!Object.keys(config).includes(defineKey)) {
+        throw new ConfigCheckError(`param lost[${name}]: ${key} ${defineKey}`)
       }
     }
-    // ...
-    return data
+    return config
   },
 })

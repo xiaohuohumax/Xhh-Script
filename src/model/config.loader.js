@@ -1,70 +1,69 @@
-import { ConfigError, ConfigErrorParam } from '../exception/config.error'
-import { isDev } from '../utils/meta.env'
-
 export class ConfigLoader {
   constructor({
-    key = '',
+    key,
+    config = {},
     name = '',
-    data = {},
     description = '',
-    fieldAnnotations = {},
-    checkCallback = (_data, _defaultData) => {},
+    fieldDescription = {},
+    checkCallback = ({
+      key,
+      name,
+      description,
+      fieldDescription,
+      config = {},
+      defaultConfig = {},
+    }) => config,
   }) {
     this._key = key
+    this._defaultConfig = config
     this._name = name
-    this._data = data
     this._description = description
-    this._fieldAnnotations = fieldAnnotations
-    this._formatSpaceSize = 20
-    this._formatDividingLineSize = 100
+    this._fieldDescription = fieldDescription
     this._checkCallback = checkCallback
   }
 
-  _checkConfig(config) {
-    try {
-      this._data = this._checkCallback(config, this._data)
-    } catch (err) {
-      throw new ConfigError(
-        this._name,
-        this._key,
-        err instanceof ConfigErrorParam ? err.param : null,
-        err.message,
-      )
-    }
+  getKey() {
+    return this._key
   }
 
-  checkConfig() {
-    this._checkConfig(this.getConfig())
+  getName() {
+    return this._name
   }
 
-  checkDefaultConfig() {
-    this._checkConfig(this._data)
+  getDescription() {
+    return this._description
+  }
+
+  getFieldDescription() {
+    return this._fieldDescription
+  }
+
+  getDefaultConfig() {
+    return this._defaultConfig
   }
 
   getConfig() {
-    return isDev ? this._data : window[this._key]
+    const isDev = import.meta.env.DEV
+    return isDev ? this._defaultConfig : window[this._key]
   }
 
-  getConfigStr() {
-    let fieldAnnotations = Object.entries(this._fieldAnnotations)
-      .map(([key, value]) => [key, Array.isArray(value) ? value : [value]])
-      .map(([key, value]) => [
-        key.padEnd(this._formatSpaceSize) + value.shift(),
-        ...value.map(item => ''.padEnd(this._formatSpaceSize) + item),
-      ])
-      .flat(Infinity)
+  _check(config) {
+    const checkRes = this._checkCallback({
+      key: this._key,
+      name: this._name,
+      description: this._description,
+      fieldDescription: this._fieldDescription,
+      config,
+      defaultConfig: this._defaultConfig,
+    })
+    this._defaultConfig = checkRes == undefined ? this._defaultConfig : checkRes
+  }
 
-    let comments = [
-      this._name,
-      this._description,
-      ''.padEnd(this._formatDividingLineSize, '='),
-      ...fieldAnnotations,
-    ]
-      .map(item => '// ' + item)
-      .join('\n')
+  checkConfig() {
+    this._check(this.getConfig())
+  }
 
-    const data = JSON.stringify(this._data, null, 2)
-
-    return `${comments}\nwindow.${this._key} = ${data};\n`
+  checkDeafultConfig() {
+    this._check(this._defaultConfig)
   }
 }

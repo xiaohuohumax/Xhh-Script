@@ -1,7 +1,7 @@
 {
   "name": "xhh-script",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "module",
   "description": "小火狐自用油猴脚本 /Shadow DOM/ [VIP视频解析][网盘资源搜索]",
   "author": "xiaohuohumax",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.0-alpha1",
+    "pinia": "^2.0.29",
     "vue": "^3.2.45"
   },
   "devDependencies": {

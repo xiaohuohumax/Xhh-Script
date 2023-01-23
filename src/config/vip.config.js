@@ -1,4 +1,4 @@
-import { ConfigErrorParam } from '../exception/config.error'
+import { ConfigCheckError } from '../exception/config.error'
 import { ConfigLoader } from '../model/config.loader'
 import vipApisJson from '../apis/vip.json'
 
@@ -8,10 +8,10 @@ export function formatVipApi(vipApis) {
     .sort((a, b) => (a.index > b.index ? -1 : 1))
 }
 
-export const vipConfigLoader = new ConfigLoader({
+export default new ConfigLoader({
   key: 'vip_config',
   name: 'VIP视频解析配置',
-  data: {
+  config: {
     icon: '🎥',
     name: 'VIP视频解析',
     isUseVip: true,
@@ -36,7 +36,7 @@ export const vipConfigLoader = new ConfigLoader({
     apis: formatVipApi(vipApisJson),
   },
   description: 'vip config',
-  fieldAnnotations: {
+  fieldAnnotation: {
     icon: '模块图标',
     name: '模块名称',
     isUseVip: '是否使用[VIP视频解析]模块',
@@ -51,16 +51,15 @@ export const vipConfigLoader = new ConfigLoader({
     'apis.title': '提示信息 [可缺省,缺省与name相同]',
     'apis.index': '排序下标越大越靠前 [可缺省,缺省为0]',
   },
-  checkCallback: (data, defaultData) => {
-    if (data == undefined) {
-      throw new Error('config lost')
+  checkCallback: ({ key, name, description, fieldDescription, config, defaultConfig }) => {
+    if (config == undefined) {
+      throw new ConfigCheckError(`config lost[${name}]: ${key}`)
     }
-    for (let defineKey of Object.keys(defaultData)) {
-      if (!Object.keys(data).includes(defineKey)) {
-        throw new ConfigErrorParam(defineKey, 'param lost')
+    for (let defineKey of Object.keys(defaultConfig)) {
+      if (!Object.keys(config).includes(defineKey)) {
+        throw new ConfigCheckError(`param lost[${name}]: ${key} ${defineKey}`)
       }
     }
-    // ...
-    return data
+    return config
   },
 })

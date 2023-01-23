@@ -44,37 +44,38 @@ window.base_config = {
   npm run build
   ```
 
-### 📂 使用油猴调试
+## 🔗 快速使用油猴调试
 
-- 打包项目, 生成脚本 [xhh-script.js](./dist/xhh-script.js)
-- 修改油猴插件允许读取本地文件
-- 油猴新建脚本页
-- 新建脚本并添加 header 指向打包完成脚本即可
+- 首先赋予油猴读取本地文件的权限
+- 然后执行 npm run build 生成 [quick.test.js](./dist/quick.test.js)
+- 新建一个油猴脚本, 用 [quick.test.js](./dist/quick.test.js) 替换原内容即可
 
-  ```javascript
-  // ==UserScript==
-  // @name         测试
-  // ...
-  // @require      file://D:\Github\Xhh-Script\dist\xhh-script.js
-  // ==/UserScript==
+  ```txt
+  // 此 header 会自动本地加载打包完成的脚本
+  // @require      file://.../xhh-script.js
   ```
+
+### 📅 更新记录
+
+[记录](./history.md)
 
 ### ⚙ 项目环境
 
-vite + bootstrap + vue3
+vite + bootstrap + vue3 + pinia
 
 ### 🌳 项目文件结构说明
 
 ```text
 Xhh-Script
- ├── build                      // 脚本构建插件
- │   ├── index.js
- │   └── plugins
- │       ├── format.js
- │       └── template.txt
- ├── dist                       // 油猴脚本
- │   └── xhh-script.js
- ├── global.config.js           // 全局配置
+ ├── build                        // 打包
+ │   ├── load.config.js
+ │   ├── load.header.js
+ │   ├── plugins                  // vite 油猴插件
+ │   ├── template
+ │   └── utils.js
+ ├── dist                         // 打包结果
+ ├── global.config.js             // 全局配置
+ ├── history.md
  ├── index.html
  ├── jsconfig.json
  ├── LICENSE
@@ -82,37 +83,21 @@ Xhh-Script
  ├── package.json
  ├── README.md
  ├── src
- │   ├── apis                   // 模块 API
- │   │   ├── api.rule.md        // API 格式说明
- │   │   ├── pan.json
- │   │   └── vip.json
+ │   ├── apis                     // 接口集合
  │   ├── App.vue
  │   ├── components
- │   │   ├── EmojiIcon.vue
- │   │   └── ModuleCard.vue
- │   ├── config                 // 插件配置
- │   │   ├── base.config.js
- │   │   ├── pan.config.js
- │   │   └── vip.config.js
+ │   ├── config                   // 配置
+ │   ├── define.element.js
  │   ├── exception
- │   │   └── config.error.js
- │   ├── header                 // 油猴插件 header
- │   │   ├── headers.js
- │   │   └── headers.json
- │   ├── init.js
- │   ├── main.js
+ │   ├── header                   // 油猴 header
+ │   ├── load.style.js
+ │   ├── main.js                  // 入口
  │   ├── model
- │   │   └── config.loader.js
- │   ├── module                 // 子模块
- │   │   ├── PanModule.vue
- │   │   └── VipModule.vue
- │   └── utils                  // 辅助工具
- │       ├── load.config.js
- │       ├── load.header.js
- │       ├── load.style.js
- │       ├── logger.js
- │       ├── meta.env.js
- │       └── url.js
+ │   ├── module                   // 子模块
+ │   ├── plugin
+ │   ├── store                    // pinia 持久化仓库
+ │   ├── style.css
+ │   └── utils                    // 工具
  └── vite.config.js
 ```
 

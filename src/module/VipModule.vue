@@ -35,11 +35,15 @@
           v-for="(item, index) in vipApi"
           :key="index"
           type="button"
-          class="btn btn-outline-primary btn-sm w-100 text-start interval-col"
+          class="btn btn-outline-primary btn-sm w-100 text-start interval-col d-flex justify-content-between align-items-center"
           :title="item.title"
           @click="vipGo(item.api)"
         >
-          {{ item.name }}
+          <div>{{ item.name }}</div>
+          <div
+            v-if="item.api == vipStore.historyApi.value"
+            class="d-inline-block p-1 border border-3 border-danger rounded-circle"
+          ></div>
         </button>
         <div v-if="vipApiBackup.length == 0">
           <button
@@ -65,12 +69,13 @@
 <script setup>
 import ModuleCard from '@/components/ModuleCard.vue'
 import { getLocationUrl, openNewUrl } from '../utils/url'
-import { baseConfigLoader } from '@/config/base.config'
-import { vipConfigLoader, formatVipApi } from '@/config/vip.config'
-import { onErrorCaptured, ref, watch } from 'vue'
-import { isDev } from '@/utils/meta.env'
+import { baseConfigLoader, vipConfigLoader, formatVipApi } from '@/config/index'
+import { useVipStoreRefs } from '@/store/vip.store'
+import { ref, watch } from 'vue'
 import { matchUrl } from '@/utils/url'
 import logger from '@/utils/logger'
+
+const vipStore = useVipStoreRefs()
 
 const vipConfig = vipConfigLoader.getConfig()
 const baseConfig = baseConfigLoader.getConfig()
@@ -92,10 +97,11 @@ watch(
 
 function vipGo(api) {
   openNewUrl(api.replace(vipConfig.apiReplaceFlag, getLocationUrl()))
+  vipStore.historyApi.value = api
 }
 
 function isLoadModule() {
-  if ((vipConfig.isUseVip && matchUrl(vipConfig.vipMatchRe)) || isDev) {
+  if ((vipConfig.isUseVip && matchUrl(vipConfig.vipMatchRe)) || import.meta.env.DEV) {
     logger.info('load module', vipConfig.name)
     return true
   } else {

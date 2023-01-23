@@ -47,12 +47,16 @@
           v-for="(item, index) in panApi"
           :key="index"
           type="button"
-          class="btn btn-sm w-100 text-start interval-col"
+          class="btn btn-sm w-100 text-start interval-col d-flex justify-content-between align-items-center"
           :class="item == chooseApi ? 'btn-warning' : 'btn-outline-primary'"
           :title="item.title"
           @click="panChoose(item)"
         >
-          {{ item.name }}
+          <div>{{ item.name }}</div>
+          <div
+            v-if="item.api == panStore.historyApi.value"
+            class="d-inline-block p-1 border border-3 border-danger rounded-circle"
+          ></div>
         </button>
         <div v-if="panApiBackup.length == 0">
           <button
@@ -77,13 +81,14 @@
 </template>
 <script setup>
 import ModuleCard from '@/components/ModuleCard.vue'
-import { baseConfigLoader } from '@/config/base.config'
-import { panConfigLoader, formatPanApi } from '@/config/pan.config'
+import { baseConfigLoader, panConfigLoader, formatPanApi } from '@/config/index'
+import { usePanStoreRefs } from '@/store/pan.store'
 import { openNewUrl } from '@/utils/url'
-import { isDev } from '@/utils/meta.env'
 import { matchUrl } from '@/utils/url'
 import { ref, watch } from 'vue'
 import logger from '@/utils/logger'
+
+const panStore = usePanStoreRefs()
 
 const panConfig = panConfigLoader.getConfig()
 const baseConfig = baseConfigLoader.getConfig()
@@ -140,10 +145,11 @@ function panGo() {
     return
   }
   openNewUrl(chooseApi.value.api.replace(panConfig.apiReplaceFlag, panSearchInput.value.trim()))
+  panStore.historyApi.value = chooseApi.value.api
 }
 
 function isLoadModule() {
-  if ((panConfig.isUsePan && matchUrl(panConfig.panMatchRe)) || isDev) {
+  if ((panConfig.isUsePan && matchUrl(panConfig.panMatchRe)) || import.meta.env.DEV) {
     logger.info('load module', panConfig.name)
     return true
   } else {

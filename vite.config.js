@@ -1,11 +1,18 @@
-import globalConfig from './global.config.js'
-import { setupPlugins } from './build/index.js'
+import tampermonkey from './build/plugins/tampermonkey'
+import globalConfig from './global.config'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig(config => {
+  /** @type {import('vite').UserConfig} */
   return {
-    plugins: setupPlugins(config),
+    plugins: [
+      vue({
+        customElement: true,
+      }),
+      tampermonkey(config),
+    ],
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),

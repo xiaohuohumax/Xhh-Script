@@ -1,17 +1,17 @@
-import { ConfigErrorParam } from '../exception/config.error'
+import { ConfigCheckError } from '../exception/config.error'
 import { ConfigLoader } from '../model/config.loader'
 
-export const baseConfigLoader = new ConfigLoader({
+export default new ConfigLoader({
   key: 'base_config',
   name: '基础配置',
-  data: {
+  config: {
     elementName: 'xhh-script',
     fixedTop: '10px',
     fixedLeft: '10px',
     showType: 'hover',
   },
   description: 'base config',
-  fieldAnnotations: {
+  fieldDescription: {
     elementName: 'Shadow DOM 标签名称',
     fixedTop: '模块距离浏览器顶部距离',
     fixedLeft: '模块距离浏览器左侧距离',
@@ -22,16 +22,15 @@ export const baseConfigLoader = new ConfigLoader({
       'click: 鼠标点击模块图标显示',
     ],
   },
-  checkCallback: (data, defaultData) => {
-    if (data == undefined) {
-      throw new Error('config lost')
+  checkCallback: ({ key, name, description, fieldDescription, config, defaultConfig }) => {
+    if (config == undefined) {
+      throw new ConfigCheckError(`config lost[${name}]: ${key}`)
     }
-    for (let defineKey of Object.keys(defaultData)) {
-      if (!Object.keys(data).includes(defineKey)) {
-        throw new ConfigErrorParam(defineKey, 'param lost')
+    for (let defineKey of Object.keys(defaultConfig)) {
+      if (!Object.keys(config).includes(defineKey)) {
+        throw new ConfigCheckError(`param lost[${name}]: ${key} ${defineKey}`)
       }
     }
-    // ...
-    return data
+    return config
   },
 })

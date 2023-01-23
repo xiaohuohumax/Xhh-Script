@@ -1,0 +1,24 @@
+/* load bootstrap */
+@import 'bootstrap';
+
+:host {
+  all: initial;
+  z-index: 999999;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  top: var(--fixed-top);
+  left: var(--fixed-left);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.interval-col {
+  margin-bottom: 8px;
+}
+
+.interval-col:last-child {
+  margin-bottom: 0;
+}
